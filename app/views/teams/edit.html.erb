@@ -4,3 +4,6 @@
 
 <%= link_to "show the #{@team.name} team", @team %> |
 <%= link_to "back to teams", teams_path %>
+
+<br/><br/>
+<%= link_to "add project", :controller => 'projects', :action => 'new', :team => @team.id %>

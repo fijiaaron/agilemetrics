@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-	validates :name, :presence => true, :uniqueness => true
+	validates :name, :presence => true
 	validates :tfs_path, :presence => true
 	validates :team_id, :presence => true
 

@@ -1,6 +1,48 @@
-<% if @projects.size > 0 %>
-	has projects
+<% if @team.projects.size > 0 %>
 
+	<br/><br/>
+
+	<!-- //TODO: this should render the regular projects table -->
+	<table class="projects">
+
+	  <thead class="projectInfo">
+		<th class="projectInfo" colspan="5">projects</th>
+	  </thead>
+
+	  <thead class="projectInfo">
+	    <th>Name</th>
+	    <th>Tfs Path</th>
+	    <th>Open Defects</th>
+	    <th colspan="2">actions</th>
+	  </thead>
+
+	<% @team.projects.each do |project| %>
+	  <tr>
+	    <td><%= link_to project.name, project %></td>
+	    <td><%= project.tfs_path %></td>
+	    <td> 
+	      <table>
+	      <thead>
+	        <th class="projectInfo"> Critical </th>
+		<th class="projectInfo"> High </th>
+		<th class="projectInfo"> Medium </th>
+		<th class="projectInfo"> Low </th>
+	      </thead>
+	      <tbody>
+	        <td> 0 </th>
+		<td> 0 </th>
+		<td> 0 </th>
+		<td> 0 </th>
+	      </tbody>
+	      </table>
+            </td>
+	    <td><%= link_to 'Edit', edit_project_path(project) %></td>
+	    <td><%= link_to 'Delete', project, confirm: 'Are you sure?', method: :delete %></td>
+	  </tr>
+	<% end %>
+	</table>
+
+	<br />
 
 
 <% else %>

@@ -29,5 +29,9 @@
 
 <h2>Projects</h2>
 <p>You can add projects from TFS to track open defects</p> 
-<%= link_to "add project", :controller => 'projects', :action => 'new', :team => @team.id, :class => "button" %>
+
+<%= link_to :controller => 'projects', :action => 'new', :team => @team.id do %>
+<%= content_tag(:span, "add project", :class => "button") %><% end %>
+
+<%= render "teams/projectlist" %>
 

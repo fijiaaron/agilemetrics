@@ -1,0 +1,2 @@
+module OpenDefectsHelper
+end

@@ -9,8 +9,9 @@ gem 'rails', '3.2.0'
 #gem 'pg'
 gem 'mysql2'
 
-gem 'devise', '~> 1.4'
+gem 'devise', '> 2.0'
 gem 'devise_ldap_authenticatable'
+gem 'devise-encryptable'
 
 #gem 'rake', '0.9.2.2'
 
@@ -43,3 +44,5 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem 'mongrel', '>=1.2.0.pre2'

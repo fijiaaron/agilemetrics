@@ -12,6 +12,10 @@
 		<%= render :partial => "chartdefefficiencytrend", :locals => { :last_sprints => last_sprints } %>
 		<%= render :partial => "chartdefprocesstrend", :locals => { :last_sprints => last_sprints } %>
 		<%= render :partial => "chartdefteamsize", :locals => { :last_sprints => last_sprints } %>
+		
+		<%= render :partial => "chartdefopendefects6", :locals => { :last_sprints => last_sprints } %>
+		<%= render :partial => "chartdefopendefects", :locals => { :last_sprints => last_sprints } %>
+
 		<%= render :partial => "chartdeftests", :locals => { :last_sprints => last_sprints } %>
 		<%= render :partial => "chartdefcoverage", :locals => { :last_sprints => last_sprints } %>
 
@@ -25,8 +29,15 @@
 		</tr>
 		<tr>
 		<td width="50%"><div id="processTrend"></div></td>
-		<td width="50%"><div id="teamSizeTrend"></div></td>
+<!--		<td width="50%"><div id="teamSizeTrend"></div></td> -->
+		<td width="50%" height="100%"><div id="openDefectsTrend6"></div></td> 
+
 		</tr>
+		
+		<tr>
+		<td width="100%" colspan="2"><div id="openDefectsTrend"></div></td>		
+		</tr>
+
 		<tr>
 		<td width="50%"><div id="testsTrend"></div></td>
 		<td width="50%"><div id="coverageTrend"></div></td>
@@ -35,3 +46,4 @@
 <% end %>
 </div>
 <div class="clear"></div>
+<div width="1px" height="1px" id="teamSizeTrend"></div>

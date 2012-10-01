@@ -26,3 +26,8 @@
 <p><%= link_to "add a sprint", new_team_sprint_path(@team), :class => "button"  %></p>
 <% end -%>
 <%= render "teams/sprintlist" %>
+
+<h2>Projects</h2>
+<p>You can add projects from TFS to track open defects</p> 
+<%= link_to "add project", :controller => 'projects', :action => 'new', :team => @team.id, :class => "button" %>
+

@@ -8,6 +8,6 @@ class Team < ActiveRecord::Base
 					:order => "sprint_name asc, end_date asc",
 					:dependent => :destroy
 
-	has_many :projets
+	has_many :projects
 
 end

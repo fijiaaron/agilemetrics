@@ -23,6 +23,8 @@ class TeamsController < ApplicationController
 	@linear_regression = get_linear_regression_actual_velocity(@team.sprints, @last_sprint)
 	@averages_set = last_n_sprints_inclusive(@team.sprints, @summary_sprint, 6)
 
+	@projects = @team.projects
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }

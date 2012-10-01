@@ -1,29 +1,32 @@
-<h1>Listing projects</h1>
+<h1>Projects</h1>
+
+<%= link_to 'add a project', new_project_path, :class => "button"  %>
+<br/><br/>
+
 
 <table>
+
   <tr>
-    <th>Id</th>
+        <th colspan="5">Active Projects</th>
+  </tr>
+
+  <tr>
     <th>Name</th>
     <th>Tfs path</th>
     <th>Team</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th colspan="2">actions</th>
   </tr>
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.id %></td>
-    <td><%= project.name %></td>
+    <td><%= link_to project.name, project %></td>
     <td><%= project.tfs_path %></td>
-    <td><%= project.team_id %></td>
-    <td><%= link_to 'Show', project %></td>
+    <td><%= project.team.name %></td>
+  
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', project, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Project', new_project_path %>

@@ -1,4 +1,8 @@
 Agilemetrics::Application.routes.draw do
+  resources :open_defects_by_weeks
+
+  resources :open_defects
+
   resources :projects
 
   devise_for :users

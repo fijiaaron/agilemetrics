@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121001183158) do
+ActiveRecord::Schema.define(:version => 20121010210048) do
 
-  create_table "open_defects_by_week", :force => true do |t|
-    t.date    "week"
-    t.integer "project_id"
-    t.integer "critical"
-    t.integer "high"
-    t.integer "medium"
-    t.integer "low"
+  create_table "open_defects", :force => true do |t|
+    t.date     "week_ending"
+    t.integer  "critical"
+    t.integer  "high"
+    t.integer  "medium"
+    t.integer  "low"
+    t.integer  "project_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "projects", :force => true do |t|

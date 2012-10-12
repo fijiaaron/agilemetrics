@@ -1,3 +1,5 @@
+
+#var @open_defects = open_defects.find_all_by_sql(%q{ select t.name, p.tfs_path, o.* from open_defects o, projects p, teams t where o.project_id = p.id and p.team_id = t.id and o.week_ending > DATE_SUB(NOW(),INTERVAL 1 YEAR) and t.name='Signup' })
 var openDefectsChart = {
 	chartType: 'ColumnChart',
 	dataTable: [

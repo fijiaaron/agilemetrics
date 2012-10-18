@@ -1,5 +1,19 @@
 class SprintsController < ApplicationController
 	include SprintsHelper
+
+  # GET /teams/1/sprints
+  # GET /teams/1/sprints.json
+  def index
+    CUSTOM_LOGGER.info("in SprintsController#index")
+    @team = Team.find(params[:team_id])
+    @sprints = @team.sprints.find(:all)
+
+    respond_to do |format|
+	    format.html
+      format.json
+    end
+  end
+
   # GET /teams/1/sprints/1
   # GET /teams/1/spritns/1.json
   def show

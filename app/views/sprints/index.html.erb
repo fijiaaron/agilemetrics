@@ -1,0 +1,13 @@
+<h1><%= @team.name %></h1>
+<%= link_to "back to teams", teams_path %>
+<%= link_to "back to the #{@team.name} team", team_path(@team.id) %>
+
+<h2>sprints</h2>
+
+<p>Tip: sprints are ordered by name with the most recent at top of the list below. Name your sprints to fit alphabetically in the list.</p>
+
+<% if is_username_an_owner_of_team?(current_user.login, @team) -%>
+<p><%= link_to "add a sprint", new_team_sprint_path(@team), :class => "button"  %></p>
+<% end -%>
+
+<%= render "teams/sprintlist" %>

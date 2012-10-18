@@ -3,7 +3,6 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
@@ -14,6 +13,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
+    @team = Team.find(@project.team_id)
+    @defects = OpenDefect.where(:project_id => @project.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,6 +36,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    @teams = Team.where(:is_archived => false)
   end
 
   # POST /projects
@@ -57,6 +59,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
+    @teams = Team.where(:is_archived => false)
 
     respond_to do |format|
       if @project.update_attributes(params[:project])

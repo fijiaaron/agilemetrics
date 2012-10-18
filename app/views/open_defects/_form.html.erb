@@ -1,0 +1,45 @@
+<%= form_for(@open_defect) do |f| %>
+  <% if @open_defect.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@open_defect.errors.count, "error") %> prohibited this open_defect from being saved:</h2>
+
+      <ul>
+      <% @open_defect.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.text_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :week_ending %><br />
+    <%= f.date_select :week_ending %>
+  </div>
+  <div class="field">
+    <%= f.label :critical %><br />
+    <%= f.number_field :critical %>
+  </div>
+  <div class="field">
+    <%= f.label :high %><br />
+    <%= f.text_field :high %>
+  </div>
+  <div class="field">
+    <%= f.label :medium %><br />
+    <%= f.text_field :medium %>
+  </div>
+  <div class="field">
+    <%= f.label :low %><br />
+    <%= f.text_field :low %>
+  </div>
+  <div class="field">
+    <%= f.label :project_id %><br />
+    <%= f.text_field :project_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 <p id="notice"></p>
+<h1> Project </h1>
 
 <p>
   <b>Name:</b>
@@ -12,9 +13,16 @@
 
 <p>
   <b>Team:</b>
-  <%= @project.team_id %>
+  <%= link_to @team.name, team_path(@team) %>
 </p>
 
+<h2> Open Defects </h2>
+
+<p>
+<%= link_to "add open defects", new_open_defect_path, :class => "button" %>
+</p>
+
+<%= render "projects/opendefectslist" %>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'All Projects', projects_path %>

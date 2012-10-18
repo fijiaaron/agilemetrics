@@ -24,11 +24,10 @@
   </div>
   <div class="field">
     <%= f.label 'Team' %><br />
-
-    <%= f.collection_select :team_id, Team.all, :id, :name, :prompt => true, :selected => selected?(params[:team]) %>
+    <%= f.collection_select :team_id, @teams , :id, :name, :prompt => true, :selected => selected?(params[:team]) %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "save", :class => "button" %>
   </div>
 <% end %>

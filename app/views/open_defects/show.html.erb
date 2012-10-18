@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @open_defect.id %>
+</p>
+
+<p>
+  <b>Week ending:</b>
+  <%= @open_defect.week_ending %>
+</p>
+
+<p>
+  <b>Critical:</b>
+  <%= @open_defect.critical %>
+</p>
+
+<p>
+  <b>High:</b>
+  <%= @open_defect.high %>
+</p>
+
+<p>
+  <b>Medium:</b>
+  <%= @open_defect.medium %>
+</p>
+
+<p>
+  <b>Low:</b>
+  <%= @open_defect.low %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @open_defect.project_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_open_defect_path(@open_defect) %> |
+<%= link_to 'Back', open_defects_path %>

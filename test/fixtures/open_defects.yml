@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 
+  week_ending: 2012-10-10
+  critical: 1
+  high: 
+  medium: 
+  low: 
+  project_id: 
+
+two:
+  id: 
+  week_ending: 2012-10-10
+  critical: 1
+  high: 
+  medium: 
+  low: 
+  project_id: 

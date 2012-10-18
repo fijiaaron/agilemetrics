@@ -5,5 +5,6 @@ class Sprint < ActiveRecord::Base
 	validates :nr_manual_tests, :numericality => { :greater_than_or_equal_to => 0 }
 	validates :nr_automated_tests, :numericality => { :greater_than_or_equal_to => 0 }
 
+  validates :planned_velocity, :presence => true
 	belongs_to :team
 end

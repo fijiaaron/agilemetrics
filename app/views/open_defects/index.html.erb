@@ -1,0 +1,35 @@
+<h1>Listing open_defects</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Week ending</th>
+    <th>Critical</th>
+    <th>High</th>
+    <th>Medium</th>
+    <th>Low</th>
+    <th>Project</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @open_defects.each do |open_defect| %>
+  <tr>
+    <td><%= open_defect.id %></td>
+    <td><%= open_defect.week_ending %></td>
+    <td><%= open_defect.critical %></td>
+    <td><%= open_defect.high %></td>
+    <td><%= open_defect.medium %></td>
+    <td><%= open_defect.low %></td>
+    <td><%= open_defect.project_id %></td>
+    <td><%= link_to 'Show', open_defect %></td>
+    <td><%= link_to 'Edit', edit_open_defect_path(open_defect) %></td>
+    <td><%= link_to 'Destroy', open_defect, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Open defect', new_open_defect_path %>

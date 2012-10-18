@@ -21,7 +21,7 @@
 <% end %>
 
 <h2>sprints</h2>
-<p>Tip: teams are ordered by name with the most recent at top of the list below. Name your sprints to fit alphabetically in the list.</p>
+<p>Tip: sprints are ordered by name with the most recent at top of the list below. Name your sprints to fit alphabetically in the list.</p>
 <% if is_username_an_owner_of_team?(current_user.login, @team) -%>
 <p><%= link_to "add a sprint", new_team_sprint_path(@team), :class => "button"  %></p>
 <% end -%>

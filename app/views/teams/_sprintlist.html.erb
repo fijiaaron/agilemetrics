@@ -1,4 +1,5 @@
 <% if @team.sprints.size > 0 %>
+
 <table class="sprints">
 <thead>
 <tr>
@@ -32,4 +33,8 @@
 <%= render @team.sprints.reverse %>
 </tbody>
 </table>
+
+
+<% else %>
+	no sprints
 <% end %>

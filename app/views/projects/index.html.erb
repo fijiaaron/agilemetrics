@@ -1,31 +1,42 @@
 <h1>Projects</h1>
 
-<%= link_to 'add a project', new_project_path, :class => "button" %>
-<br/><br/>
+<% if @team %>
+	<h2> for <%= link_to @team.name, team_path(@team) %> team </h2>
+<% end %>
 
 <table>
 
+<% if not defined? @team %>
   <tr>
         <th colspan="5">all projects</th>
   </tr>
 
+<% end %>
+  
   <tr>
     <th>Name</th>
-    <th>Tfs path</th>
+    <th>TFS path</th>
     <th>Team</th>
-    <th colspan="2">actions</th>
+    <th>Actions</th>
   </tr>
+
+
 
 <% @projects.each do |project| %>
   <tr>
     <td><%= link_to project.name, project %></td>
     <td><%= project.tfs_path %></td>
     <td><%= project.team.name %></td>
-  
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Delete', project, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to 'Delete', project, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
+
 </table>
 
 <br />
+
+<% if is_username_an_owner_of_team?(current_user.login, @team) -%>
+  <p>You can add projects from TFS to track open defects</p> 
+  <%= link_to 'add a project', new_project_path, :class => "button" %>
+<% end %>
+

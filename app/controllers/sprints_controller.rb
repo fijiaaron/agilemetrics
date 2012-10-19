@@ -4,7 +4,6 @@ class SprintsController < ApplicationController
   # GET /teams/1/sprints
   # GET /teams/1/sprints.json
   def index
-    CUSTOM_LOGGER.info("in SprintsController#index")
     @team = Team.find(params[:team_id])
     @sprints = @team.sprints.find(:all)
 

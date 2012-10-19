@@ -21,17 +21,21 @@
 <% end %>
 
 <h2>sprints</h2>
+<%= render "teams/sprintlist" %>
 <p>Tip: sprints are ordered by name with the most recent at top of the list below. Name your sprints to fit alphabetically in the list.</p>
 <% if is_username_an_owner_of_team?(current_user.login, @team) -%>
 <p><%= link_to "add a sprint", new_team_sprint_path(@team), :class => "button"  %></p>
 <% end -%>
-<%= render "teams/sprintlist" %>
+
+<br/><br/>
 
 <h2>Projects</h2>
-<p>You can add projects from TFS to track open defects</p> 
-
-<%= link_to :controller => 'projects', :action => 'new', :team => @team.id do %>
-<%= content_tag(:span, "add project", :class => "button") %><% end %>
-
 <%= render "teams/projectlist" %>
+
+<% if is_username_an_owner_of_team?(current_user.login, @team) -%>
+  <p>You can add projects from TFS to track open defects</p> 
+  <%= link_to :controller => 'projects', :action => 'new', :team => @team.id do %>
+    <%= content_tag(:span, "add project", :class => "button") %>
+  <% end %>
+<% end %>
 

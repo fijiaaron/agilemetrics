@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
 	include SprintsHelper
+
   # GET /teams
   # GET /teams.json
   def index

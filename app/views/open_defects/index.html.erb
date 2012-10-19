@@ -1,35 +1,15 @@
-<h1>Listing open_defects</h1>
+<h1>Open Defects</h1>
 
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Week ending</th>
-    <th>Critical</th>
-    <th>High</th>
-    <th>Medium</th>
-    <th>Low</th>
-    <th>Project</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @open_defects.each do |open_defect| %>
-  <tr>
-    <td><%= open_defect.id %></td>
-    <td><%= open_defect.week_ending %></td>
-    <td><%= open_defect.critical %></td>
-    <td><%= open_defect.high %></td>
-    <td><%= open_defect.medium %></td>
-    <td><%= open_defect.low %></td>
-    <td><%= open_defect.project_id %></td>
-    <td><%= link_to 'Show', open_defect %></td>
-    <td><%= link_to 'Edit', edit_open_defect_path(open_defect) %></td>
-    <td><%= link_to 'Destroy', open_defect, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% if @team %>
+	<h2> team <%= link_to @team.name, team_path(@team) %> </h2>
 <% end %>
-</table>
+
+<% if @project %>
+	<h2> project <%= link_to @project.name, project_path(@project) %> </h2>
+<% end %>
+
+<%= render "open_defects/list", :open_defects => @open_defects %>
 
 <br />
 
-<%= link_to 'New Open defect', new_open_defect_path %>
+<%= link_to 'Add Open Defects', new_open_defect_path, :project => @project, :class => "button" %>

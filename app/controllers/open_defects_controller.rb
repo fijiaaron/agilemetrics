@@ -2,7 +2,24 @@ class OpenDefectsController < ApplicationController
   # GET /open_defects
   # GET /open_defects.json
   def index
-    @open_defects = OpenDefect.all
+
+    if params[:team_id]
+      @team = Team.find(params[:team_id])
+      @projects = Project.find(:team_id => @team.id)
+    else
+      @projects = Project.all
+    end
+
+    if params[:project_id]
+      @project = Project.find(params[:project_id])
+    end
+
+    if @project
+      @open_defects = @project.open_defects.order("week_ending desc")
+    else
+      @open_defects = OpenDefect.all
+    end
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +42,18 @@ class OpenDefectsController < ApplicationController
   # GET /open_defects/new.json
   def new
     @open_defect = OpenDefect.new
+    @projects = Project.order("name")
+
+    if params[:project_id]
+      @project = Project.find(params[:project_id])
+    end
+
+#   if params[:team_id]
+#      @team = Team.find(params[:team_id])
+#      @projects = Project.where(:team_id => @team.id)
+#    else
+#      @projects = Project.all
+#    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +64,8 @@ class OpenDefectsController < ApplicationController
   # GET /open_defects/1/edit
   def edit
     @open_defect = OpenDefect.find(params[:id])
+    @projects = Project.order("name")
+    @project = Project.find(@open_defect.project_id)
   end
 
   # POST /open_defects

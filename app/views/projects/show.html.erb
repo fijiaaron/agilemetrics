@@ -16,13 +16,19 @@
   <%= link_to @team.name, team_path(@team) %>
 </p>
 
-<h2> Open Defects </h2>
 
+<h2> Open Defects </h2>
+<%= render "projects/opendefectslist", :open_defects => current_open_defects_for_project(@project) %>
+<p>
+<%= link_to "open defects history", project_open_defects_path(@project) %>
+</p>
+
+<!--
 <p>
 <%= link_to "add open defects", new_open_defect_path, :class => "button" %>
 </p>
+-->
 
-<%= render "projects/opendefectslist" %>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Edit Project', edit_project_path(@project) %> |
 <%= link_to 'All Projects', projects_path %>

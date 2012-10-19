@@ -1,14 +1,15 @@
 Agilemetrics::Application.routes.draw do
+  devise_for :users
 
   resources :open_defects
 
-  resources :projects
-
-  devise_for :users
+  resources :projects do
+    resources :open_defects
+  end
 
   resources :teams do
-  	resources :sprints
-	  resources :projects
+    resources :sprints
+    resources :projects
   end
 
   match 'averages' => 'teams#averages', :as => "team_averages"

@@ -1,5 +1,11 @@
 <h1>New project</h1>
 
+
+<% if @team %>
+	<h2> team <%= link_to @team.name, team_path(@team) %> </h2>
+<% end %>
+
+
 <%= render 'form' %>
 
 <%= link_to 'Back', projects_path %>

@@ -1,49 +1,43 @@
 <% if @team.projects.size > 0 %>
-
-	<br/><br/>
-
 	<!-- //TODO: this should render the regular projects table -->
-	<table class="projects">
+  <table class="projects">
 
-	  <thead class="projectInfo">
-		<th class="projectInfo" colspan="5">projects</th>
-	  </thead>
+    <thead>
+      <tr>
+          <th class="projectInfo" colspan="2">Project Info</th>
+          <th class="projectInfo" colspan="5">Open Defects</th>
+      </tr>
 
-	  <thead class="projectInfo">
-	    <th>Name</th>
-	    <th>Tfs Path</th>
-	    <th>Open Defects</th>
-	    <th colspan="2">actions</th>
-	  </thead>
+      <tr>
+        <th>Name</th>
+        <th>TFS Path</th>
+        <th>Week Ending</th>
+        <th>Critical</th>
+        <th>High</th>
+        <th>Medium</th>
+        <th>Low</th>
+      </tr>
 
-	<% @team.projects.each do |project| %>
-	  <tr>
-	    <td><%= link_to project.name, project %></td>
-	    <td><%= project.tfs_path %></td>
-	    <td> 
-	      <table>
-	      <thead>
-	        <th class="projectInfo"> Critical </th>
-		<th class="projectInfo"> High </th>
-		<th class="projectInfo"> Medium </th>
-		<th class="projectInfo"> Low </th>
-	      </thead>
-	      <tbody>
-	        <td> 0 </th>
-		<td> 0 </th>
-		<td> 0 </th>
-		<td> 0 </th>
-	      </tbody>
-	      </table>
-            </td>
-	    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-	    <td><%= link_to 'Delete', project, confirm: 'Are you sure?', method: :delete %></td>
-	  </tr>
-	<% end %>
+    </thead>
+
+    <tbody>
+
+  <% @team.projects.each do |project| %>
+    <% open_defects = current_open_defects_for_project(project).first %>
+      
+      <tr>
+        <td><%= link_to project.name, project %></td>
+        <td><%= project.tfs_path %></td>
+        <td class="week_ending"><%= open_defects.week_ending %></td>
+        <td class="defect_count"><%= open_defects.critical %></td>
+        <td class="defect_count"><%= open_defects.high %></td>
+        <td class="defect_count"><%= open_defects.medium %></td>
+        <td class="defect_count"><%= open_defects.low %></td>
+      </tr>
+
+  <% end %>
+
 	</table>
-
-	<br />
-
 
 <% else %>
 	no projects

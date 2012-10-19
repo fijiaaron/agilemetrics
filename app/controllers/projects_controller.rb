@@ -1,8 +1,20 @@
 class ProjectsController < ApplicationController
+	include SprintsHelper
+  include OpenDefectsHelper
+
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+
+    if params[:team_id]
+      @team = Team.find(params[:team_id])
+      @projects = Project.where(:team_id => @team.id)
+    else
+      @projects = Project.all
+    end
+
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
@@ -14,7 +26,8 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @team = Team.find(@project.team_id)
-    @defects = OpenDefect.where(:project_id => @project.id)
+    @all_open_defects = OpenDefect.where(:project_id => @project.id)
+    @current_open_defects = OpenDefect.where(:project_id => @project.id).order("week_ending DESC").limit(1).first
 
     respond_to do |format|
       format.html # show.html.erb

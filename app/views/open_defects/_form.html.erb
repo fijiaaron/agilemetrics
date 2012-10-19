@@ -11,9 +11,14 @@
     </div>
   <% end %>
 
+
   <div class="field">
-    <%= f.label :id %><br />
-    <%= f.text_field :id %>
+    <%= f.label :project_id %><br />
+    <% if @project %>
+      <%= f.collection_select :project_id, @projects, :id, :name, :prompt => true, :selected => selected?(@project.id) %>
+    <% else %>
+      <%= f.collection_select :project_id, @projects, :id, :name, :prompt => true %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :week_ending %><br />
@@ -25,21 +30,17 @@
   </div>
   <div class="field">
     <%= f.label :high %><br />
-    <%= f.text_field :high %>
+    <%= f.number_field :high %>
   </div>
   <div class="field">
     <%= f.label :medium %><br />
-    <%= f.text_field :medium %>
+    <%= f.number_field :medium %>
   </div>
   <div class="field">
     <%= f.label :low %><br />
-    <%= f.text_field :low %>
-  </div>
-  <div class="field">
-    <%= f.label :project_id %><br />
-    <%= f.text_field :project_id %>
+    <%= f.number_field :low %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "save", :class => "button" %>
   </div>
 <% end %>

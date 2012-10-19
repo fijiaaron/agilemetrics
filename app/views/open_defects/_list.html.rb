@@ -1,2 +1,0 @@
-# open defects list
-

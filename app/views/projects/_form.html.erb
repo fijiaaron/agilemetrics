@@ -24,7 +24,7 @@
   </div>
   <div class="field">
     <%= f.label 'Team' %><br />
-    <%= f.collection_select :team_id, @teams , :id, :name, :prompt => true, :selected => selected?(params[:team]) %>
+    <%= f.collection_select :team_id, @teams , :id, :name, :prompt => true, :selected => selected?(params[:team_id]) %>
   </div>
 
   <div class="actions">

@@ -17,7 +17,6 @@
   <% project = Project.find(week.project_id) %>
   
     <tr>
-      <td class="project"><%= link_to project.name, project_path(project) %></td>
       <td class="week_ending"><%= week.week_ending %></td>
       <td class="defect_count"><%= week.critical %></td>
       <td class="defect_count"><%= week.high %></td>

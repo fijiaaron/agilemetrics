@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @team = Team.find(@project.team_id)
     @all_open_defects = OpenDefect.where(:project_id => @project.id)
-    @current_open_defects = OpenDefect.where(:project_id => @project.id).order("week_ending DESC").limit(1).first
+    @current_open_defects = OpenDefect.where(:project_id => @project.id).order("week_ending DESC").limit(1).first  #is this correct?
 
     respond_to do |format|
       format.html # show.html.erb
@@ -39,6 +39,11 @@ class ProjectsController < ApplicationController
   # GET /projects/new.json
   def new
     @project = Project.new
+    @teams = Team.where(:is_archived => false).order("name")
+
+    if params[:team_id]
+      @team = Team.find(params[:team_id])
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -56,6 +61,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(params[:project])
+
 
     respond_to do |format|
       if @project.save

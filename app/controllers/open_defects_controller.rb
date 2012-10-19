@@ -12,6 +12,7 @@ class OpenDefectsController < ApplicationController
 
     if params[:project_id]
       @project = Project.find(params[:project_id])
+      @team = Team.find(@project.team_id)
     end
 
     if @project

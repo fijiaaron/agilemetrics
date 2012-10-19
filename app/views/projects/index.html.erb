@@ -35,8 +35,10 @@
 
 <br />
 
+
 <% if is_username_an_owner_of_team?(current_user.login, @team) -%>
   <p>You can add projects from TFS to track open defects</p> 
-  <%= link_to 'add a project', new_project_path, :class => "button" %>
+
+  <%= link_to 'add a project', new_project_path, :team => @team, :class => "button" %>
 <% end %>
 

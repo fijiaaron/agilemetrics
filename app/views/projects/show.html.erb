@@ -29,6 +29,9 @@
 </p>
 -->
 
+  
+<% if is_username_an_owner_of_team?(current_user.login, @team) -%>
+  <%= link_to 'Edit Project', edit_project_path(@project) %> |
+<% end %>
 
-<%= link_to 'Edit Project', edit_project_path(@project) %> |
 <%= link_to 'All Projects', projects_path %>

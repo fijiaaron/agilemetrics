@@ -18,16 +18,22 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     @team = Team.find(params[:id])
-	@summary_sprint = last_complete_sprint(@team.sprints)
-	@first_sprint = @team.sprints.find(:first)
-	@last_sprint = @team.sprints.find(:last)
-	@linear_regression = get_linear_regression_actual_velocity(@team.sprints, @last_sprint)
-	@averages_set = last_n_sprints_inclusive(@team.sprints, @summary_sprint, 6)
+    @summary_sprint = last_complete_sprint(@team.sprints)
+    @first_sprint = @team.sprints.find(:first)
+    @last_sprint = @team.sprints.find(:last)
+    @linear_regression = get_linear_regression_actual_velocity(@team.sprints, @last_sprint)
+    @averages_set = last_n_sprints_inclusive(@team.sprints, @summary_sprint, 6)
+
+    if @team.projects.size > 0
+      @project = @team.projects[0]
+      @open_defects = OpenDefect.where(:project_id => @project.id).order("week_ending desc").limit(52)
+    end
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }
     end
+
   end
 
   # GET /averages

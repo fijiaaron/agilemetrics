@@ -26,7 +26,7 @@ module OpenDefectsHelper
     week_number = 0
     @open_defects.reverse_each do |weekly_report|
       data = [
-        weekly_report.week_ending.strftime("%Y.%m.%d"),
+        (weekly_report.week_ending - 24.hours).strftime("%Y.%m.%d"),
         weekly_report.critical,
         weekly_report.high,
         weekly_report.medium,

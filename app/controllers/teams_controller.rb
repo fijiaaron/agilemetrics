@@ -34,9 +34,9 @@ class TeamsController < ApplicationController
     if @team.projects.size > 0
       @project = @team.projects[0]
       @open_defects = open_defects_for_project(@project, @@OPEN_DEFECTS_REPORT_NUMBER_OF_WEEKS)
+      @open_defects_data_table = get_open_defects_data_table(@open_defects, @team.sprint_weeks)
     end
 
-    @open_defects_data_table = get_open_defects_data_table(@open_defects, @team.sprint_weeks)
 
 
     respond_to do |format|
@@ -44,7 +44,6 @@ class TeamsController < ApplicationController
       format.json { render json: @team }
     end
 
-    return @open_defects_data_table
 
   end
 

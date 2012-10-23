@@ -27,7 +27,7 @@ module SprintsHelper
 		if previous_sprints != nil && previous_sprints.length > 0
 			actual_velocities = previous_sprints.map { |sprint| sprint.actual_velocity }
 		end
-	
+
 		linear_regression = LinearRegression.new actual_velocities
 		return linear_regression
 	end
@@ -68,7 +68,7 @@ module SprintsHelper
 		max_pts = pts_per_person_day_array.pop
 
 		# pts per person day of previous sprint * man days of current sprint
-		target = max_pts * man_days(sprint) if max_pts != nil && sprint != nil 
+		target = max_pts * man_days(sprint) if max_pts != nil && sprint != nil
 		if target != nil
 			target.round(0)
 		else
@@ -126,9 +126,9 @@ module SprintsHelper
 		!sprint.working_days.blank? && sprint.working_days != nil &&
 		!sprint.pto_days.blank? && sprint.pto_days != nil &&
 		!sprint.planned_velocity.blank? && sprint.planned_velocity != nil &&
-		!sprint.actual_velocity.blank? && sprint.actual_velocity != nil &&
+		!sprint.actual_velocity.blank? && sprint.actual_velocity != nil && sprint.actual_velocity != 0 &&
 		!sprint.adopted_points.blank? && sprint.adopted_points != nil &&
-		!sprint.unplanned_points.blank? && sprint.unplanned_points != nil && 
+		!sprint.unplanned_points.blank? && sprint.unplanned_points != nil &&
 		!sprint.found_points.blank? && sprint.found_points != nil &&
 		!sprint.partial_points.blank? && sprint.partial_points != nil
 	end
@@ -145,6 +145,10 @@ module SprintsHelper
 	end
 
 	def focus_factor(sprint)
+    if  sprint.actual_velocity == 0 or sprint.actual_velocity.nan?
+      return 0
+    end
+
 		focus_factor = sprint.actual_velocity / capacity(sprint)
 		# Present it as a whole number instead of a decimal
 		focus_factor.round(2) * 100
@@ -204,7 +208,7 @@ module SprintsHelper
 	end
 
 	def average_focus_factor(set)
-		values = set.map { |s| focus_factor(s) }
+    values = set.map { |s| focus_factor(s) }
 		if values.length > 0
 			statsArray = StatisticalArray.new(values)
 			statsArray.average.round(0)

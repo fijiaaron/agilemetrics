@@ -1,35 +1,20 @@
-var openDefectsChart = {
-	chartType: 'ColumnChart',
-	dataTable: [
-  <%= "['Week', 'Critical', 'High', 'Medium', 'Low']" %>
-  <%= ",\n" %>
-     
-     <% week_number = 0 %>
-     <% @open_defects.reverse_each do |report| %>
-        <% if week_number == @team.sprint_weeks #report open defects at the end of each sprint %>
-          <% #date = report.week_ending.strftime("%Y.%m.%d")  %>
-          <%= "['Week ending #{report.week_ending}', #{report.critical}, #{report.high},  #{report.medium},  #{report.low}]" %>
-          <%= ",\n" %>
-          <% week_number = 0 %>
-        <% end %>
 
-       <% week_number +=1 %>
-     <% end %>
-	],
+      var openDefectsChart = {
+        chartType: 'ColumnChart',
+        dataTable:  <%= @open_defects_data_table.to_json.html_safe %>,
+        options: {
+          title: 'Open Defects',
+          titleTextStyle: { fontSize: 14 },
+          hAxis: { title: 'Sprints' },
+          vAxis: { title: 'Defects' },
+          colors: ['#4f81bd','#c0504d','#9bbb59','#8064a2'],
+          isStacked: true
+        },
+        containerId: 'openDefectsTrend'
+      };
 
-	options: {
-		title: 'Open Defects',
-		titleTextStyle: { fontSize: 14 },
-    hAxis: { title: 'Sprints' },
-		vAxis: { title: 'Defects' },
-		colors: ['#4f81bd','#c0504d','#9bbb59','#8064a2'],
-		isStacked: true
-	},
-	containerId: 'openDefectsTrend'
-};
-
-var openDefectsWrapper = new google.visualization.ChartWrapper(openDefectsChart);
-openDefectsWrapper.draw();
+      var openDefectsWrapper = new google.visualization.ChartWrapper(openDefectsChart);
+      openDefectsWrapper.draw();
 
 
 

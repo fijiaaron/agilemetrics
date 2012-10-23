@@ -2,6 +2,8 @@ class TeamsController < ApplicationController
 	include SprintsHelper
   include OpenDefectsHelper
 
+
+
   # GET /teams
   # GET /teams.json
   def index
@@ -15,6 +17,8 @@ class TeamsController < ApplicationController
     end
   end
 
+
+
   # GET /teams/1
   # GET /teams/1.json
   def show
@@ -26,20 +30,25 @@ class TeamsController < ApplicationController
     @linear_regression = get_linear_regression_actual_velocity(@team.sprints, @last_sprint)
     @averages_set = last_n_sprints_inclusive(@team.sprints, @summary_sprint, 6)
 
-    @OPEN_DEFECTS_REPORT_NUMBER_OF_WEEKS = 52
-
     #NOTE: only uses 1 project per team
     if @team.projects.size > 0
       @project = @team.projects[0]
-      @open_defects = open_defects_for_project(@project, @OPEN_DEFECTS_REPORT_NUMBER_OF_WEEKS)
+      @open_defects = open_defects_for_project(@project, @@OPEN_DEFECTS_REPORT_NUMBER_OF_WEEKS)
     end
+
+    @open_defects_data_table = get_open_defects_data_table(@open_defects, @team.sprint_weeks)
+
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }
     end
 
+    return @open_defects_data_table
+
   end
+
+
 
   # GET /averages
   # GET /averages.json
@@ -54,6 +63,8 @@ class TeamsController < ApplicationController
     end
   end
 
+
+
   # GET /teams/new
   # GET /teams/new.json
   def new
@@ -66,10 +77,14 @@ class TeamsController < ApplicationController
     end
   end
 
+
+
   # GET /teams/1/edit
   def edit
     @team = Team.find(params[:id])
   end
+
+
 
   # POST /teams
   # POST /teams.json
@@ -87,6 +102,8 @@ class TeamsController < ApplicationController
     end
   end
 
+
+
   # PUT /teams/1
   # PUT /teams/1.json
   def update
@@ -102,6 +119,8 @@ class TeamsController < ApplicationController
       end
     end
   end
+
+
 
   # DELETE /teams/1
   # DELETE /teams/1.json

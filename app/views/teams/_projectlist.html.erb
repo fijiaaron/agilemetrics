@@ -1,5 +1,4 @@
-<% if @team.projects.size > 0 %>
-	<!-- //TODO: this should render the regular projects table -->
+<% if @team.projects and @team.projects.size > 0 %>
   <table class="projects">
 
     <thead>
@@ -10,7 +9,7 @@
 
       <tr>
         <th>Name</th>
-        <th>TFS Path</th>
+        <th>TFS Area Path</th>
         <th>Week Ending</th>
         <th>Critical</th>
         <th>High</th>
@@ -23,17 +22,22 @@
     <tbody>
 
   <% @team.projects.each do |project| %>
-    <% open_defects = current_open_defects_for_project(project).first %>
-      
+  
+    <% if @open_defects %>
+      <% @open_defects.each do |report| %>
+
       <tr>
         <td><%= link_to project.name, project %></td>
         <td><%= project.tfs_path %></td>
-        <td class="week_ending"><%= open_defects.week_ending %></td>
-        <td class="defect_count"><%= open_defects.critical %></td>
-        <td class="defect_count"><%= open_defects.high %></td>
-        <td class="defect_count"><%= open_defects.medium %></td>
-        <td class="defect_count"><%= open_defects.low %></td>
+        <td class="week_ending"><%= report.week_ending %></td>
+        <td class="defect_count"><%= report.critical %></td>
+        <td class="defect_count"><%= report.high %></td>
+        <td class="defect_count"><%= report.medium %></td>
+        <td class="defect_count"><%= report.low %></td>
       </tr>
+
+      <% end %>
+    <% end %>
 
   <% end %>
 

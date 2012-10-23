@@ -13,7 +13,9 @@
 		<%= render :partial => "chartdefprocesstrend", :locals => { :last_sprints => last_sprints } %>
 		<%= render :partial => "chartdefteamsize", :locals => { :last_sprints => last_sprints } %>
 		
-		<%= render :partial => "chartdefopendefects", :locals => { :open_defects => @open_defects } %>
+    <% if @open_defects and @open_defects.size > 0 %>
+  		<%= render :partial => "chartdefopendefects", :locals => { :open_defects => @open_defects } %>
+    <% end %>
 
 		<%= render :partial => "chartdeftests", :locals => { :last_sprints => last_sprints } %>
 		<%= render :partial => "chartdefcoverage", :locals => { :last_sprints => last_sprints } %>
@@ -32,11 +34,11 @@
     <td width="50%"><div id="teamSizeTrend"></div></td>
 		</tr>
 		
-		<tr>
-		<td width="100%" colspan="2"><div id="openDefectsTrend"></div>
-
-    </td>		
+    <% if @open_defects %>
+  	<tr>
+		<td width="100%" colspan="2"><div id="openDefectsTrend"></div></td>		
 		</tr>
+    <% end %>
 
 		<tr>
 		<td width="50%"><div id="testsTrend"></div></td>
@@ -47,22 +49,3 @@
 </div>
 <div class="clear"></div>
 <div width="1px" height="1px" id="teamSizeTrend"></div>
-
-<%
-#def getOpenDefectsDataTable(open_defects)
-#  count = 0
-#  data = "['Week', 'Critical', 'High', 'Medium', 'Low']"
-#  data << ",\n"
-#  open_defects.each do |report|
-#    data << "['Week ending #{report.week_ending}', #{report.critical}, #{report.high},  #{report.medium},  #{report.low}]"
-#    if count < @open_defects.size
-#      data << ",\n"
-#    end
-#    count++
-#  end
-
-#  return data
-#end
-
-
-%>

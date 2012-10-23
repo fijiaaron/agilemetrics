@@ -1,79 +1,26 @@
-<%
-
-fields = [
-  ['Week', 'Critical', 'High', 'Medium', 'Low'],
-  ['Week ending September 18',3,6,10,5],
-  ['Week ending September 25',3,7,14,7],
-  ['Week ending October 02',4,5,26,11],
-  ['Week ending October 09',4,7,22,13],
-  ['Week ending October 16',7,18,50,27],
-  ['Week ending October 23',6,17,59,36],
-  ['Week ending October 30',1,12,65,37],
-  ['Week ending November 06',2,14,67,36],
-  ['Week ending November 13',3,15,62,33],
-  ['Week ending November 20',4,18,69,38],
-  ['Week ending November 27',3,17,67,34],
-  ['Week ending December 04',4,16,63,30],
-  ['Week ending December 11',1,12,56,29],
-  ['Week ending December 18',0,18,65,33],
-  ['Week ending December 25',0,22,69,35],
-  ['Week ending January 01',1,29,78,36],
-  ['Week ending January 08',0,25,78,36],
-  ['Week ending January 15',0,26,82,34],
-  ['Week ending January 22',1,29,77,34],
-  ['Week ending January 29',2,37,72,33],
-  ['Week ending February 05',0,34,70,36],
-  ['Week ending February 12',0,30,65,34],
-  ['Week ending February 19',0,34,63,35],
-  ['Week ending February 26',1,29,64,30],
-  ['Week ending March 05',0,22,66,29],
-  ['Week ending March 12',0,25,69,33],
-  ['Week ending March 19',1,20,63,32],
-  ['Week ending March 26',2,13,46,19],
-  ['Week ending April 02',3,17,42,18],
-  ['Week ending April 09',3,14,36,11],
-  ['Week ending April 16',2,14,33,12],
-  ['Week ending April 23',1,6,23,7],
-  ['Week ending April 30',0,7,20,7],
-  ['Week ending May 07',1,9,20,5],
-  ['Week ending May 14',0,9,19,5],
-  ['Week ending May 21',0,6,11,3],
-  ['Week ending May 28',2,10,9,2],
-  ['Week ending June 04',0,5,8,2],
-  ['Week ending June 11',1,2,5,2],
-  ['Week ending June 18',1,2,5,2],
-  ['Week ending June 25',0,1,3,3],
-  ['Week ending July 02',0,1,5,2],
-  ['Week ending July 09',0,1,4,5],
-  ['Week ending July 16',0,4,5,2],
-  ['Week ending July 23',1,7,7,3],
-  ['Week ending July 30',0,8,4,2],
-  ['Week ending August 06',0,5,5,2],
-  ['Week ending August 13',0,9,5,2],
-  ['Week ending August 20',0,8,7,2],
-  ['Week ending August 27',1,19,11,2],
-  ['Week ending September 03',1,18,16,1],
-  ['Week ending September 10',1,16,16,2],
-  ['Week ending September 17',0,19,6,2]
-];
-
-%>
-
 var openDefectsChart = {
 	chartType: 'ColumnChart',
 	dataTable: [
   <%= "['Week', 'Critical', 'High', 'Medium', 'Low']" %>
   <%= ",\n" %>
-     <% @open_defects.each do |report| %>
-         <%= "['Week ending #{report.week_ending}', #{report.critical}, #{report.high},  #{report.medium},  #{report.low}]" %>
-         <%= ",\n" %>
+     
+     <% week_number = 0 %>
+     <% @open_defects.reverse_each do |report| %>
+        <% if week_number == @team.sprint_weeks #report open defects at the end of each sprint %>
+          <% #date = report.week_ending.strftime("%Y.%m.%d")  %>
+          <%= "['Week ending #{report.week_ending}', #{report.critical}, #{report.high},  #{report.medium},  #{report.low}]" %>
+          <%= ",\n" %>
+          <% week_number = 0 %>
+        <% end %>
+
+       <% week_number +=1 %>
      <% end %>
 	],
 
 	options: {
 		title: 'Open Defects',
 		titleTextStyle: { fontSize: 14 },
-		hAxis: { title: 'Sprints' },
+    hAxis: { title: 'Sprints' },
 		vAxis: { title: 'Defects' },
 		colors: ['#4f81bd','#c0504d','#9bbb59','#8064a2'],
 		isStacked: true

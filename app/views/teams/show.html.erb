@@ -29,8 +29,12 @@
 
 <br/><br/>
 
-<h2>Projects</h2>
-<%= render "teams/projectlist" %>
+<h2>open defects</h2>
+<% @team.projects.each do |project| %>
+
+  <h4> <%= project.name %>: <%= project.tfs_path %> </h4>
+  <%= render "teams/projectlist", :project => project %>
+<% end %>
 
 <% if is_username_an_owner_of_team?(current_user.login, @team) -%>
   <p>You can add projects from TFS to track open defects</p> 
@@ -38,4 +42,3 @@
     <%= content_tag(:span, "add project", :class => "button") %>
   <% end %>
 <% end %>
-

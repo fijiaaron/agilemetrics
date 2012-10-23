@@ -2,10 +2,11 @@ class ProjectsController < ApplicationController
 	include SprintsHelper
   include OpenDefectsHelper
 
+
+
   # GET /projects
   # GET /projects.json
   def index
-
     if params[:team_id]
       @team = Team.find(params[:team_id])
       @projects = Project.where(:team_id => @team.id)
@@ -13,13 +14,13 @@ class ProjectsController < ApplicationController
       @projects = Project.all
     end
 
-
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
     end
   end
+
+
 
   # GET /projects/1
   # GET /projects/1.json
@@ -35,6 +36,8 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+
   # GET /projects/new
   # GET /projects/new.json
   def new
@@ -45,12 +48,13 @@ class ProjectsController < ApplicationController
       @team = Team.find(params[:team_id])
     end
 
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @project }
     end
   end
+
+
 
   # GET /projects/1/edit
   def edit
@@ -58,11 +62,12 @@ class ProjectsController < ApplicationController
     @teams = Team.where(:is_archived => false)
   end
 
+
+
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(params[:project])
-
 
     respond_to do |format|
       if @project.save
@@ -74,6 +79,8 @@ class ProjectsController < ApplicationController
       end
     end
   end
+
+
 
   # PUT /projects/1
   # PUT /projects/1.json
@@ -91,6 +98,8 @@ class ProjectsController < ApplicationController
       end
     end
   end
+
+
 
   # DELETE /projects/1
   # DELETE /projects/1.json

@@ -1,4 +1,6 @@
 class OpenDefectsController < ApplicationController
+
+
   # GET /open_defects
   # GET /open_defects.json
   def index
@@ -21,12 +23,13 @@ class OpenDefectsController < ApplicationController
       @open_defects = OpenDefect.all
     end
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @open_defects }
     end
   end
+
+
 
   # GET /open_defects/1
   # GET /open_defects/1.json
@@ -39,6 +42,8 @@ class OpenDefectsController < ApplicationController
     end
   end
 
+
+
   # GET /open_defects/new
   # GET /open_defects/new.json
   def new
@@ -49,18 +54,13 @@ class OpenDefectsController < ApplicationController
       @project = Project.find(params[:project_id])
     end
 
-#   if params[:team_id]
-#      @team = Team.find(params[:team_id])
-#      @projects = Project.where(:team_id => @team.id)
-#    else
-#      @projects = Project.all
-#    end
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @open_defect }
     end
   end
+
+
 
   # GET /open_defects/1/edit
   def edit
@@ -68,6 +68,8 @@ class OpenDefectsController < ApplicationController
     @projects = Project.order("name")
     @project = Project.find(@open_defect.project_id)
   end
+
+
 
   # POST /open_defects
   # POST /open_defects.json
@@ -85,6 +87,8 @@ class OpenDefectsController < ApplicationController
     end
   end
 
+
+
   # PUT /open_defects/1
   # PUT /open_defects/1.json
   def update
@@ -100,6 +104,8 @@ class OpenDefectsController < ApplicationController
       end
     end
   end
+
+
 
   # DELETE /open_defects/1
   # DELETE /open_defects/1.json

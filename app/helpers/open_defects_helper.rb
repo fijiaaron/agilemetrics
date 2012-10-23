@@ -1,10 +1,11 @@
 module OpenDefectsHelper
 
-
   @@OPEN_DEFECTS_REPORT_NUMBER_OF_WEEKS = 52
+  @@DEFAULT_SPRINT_WEEKS = 2
+
 
   # return all open defects reports for a project up to number (default is 52 weeks)
-  def open_defects_for_project(project, number=52)
+  def open_defects_for_project(project, number=@@OPEN_DEFECTS_REPORT_NUMBER_OF_WEEKS)
     OpenDefect.where(:project_id => project.id).order("week_ending DESC").limit(number)
   end
 
@@ -15,9 +16,37 @@ module OpenDefectsHelper
   end
 
 
-  @@DEFAULT_SPRINT_WEEKS = 2
-
   def get_open_defects_data_table(open_defects, sprint_weeks=@@DEFAULT_SPRINT_WEEKS)
+    result = []
+
+    headers = ['Week', 'Critical', 'High', 'Medium', 'Low'];
+    result.push headers
+
+#    week_number = 0
+    @open_defects.reverse_each do |weekly_report|
+      data = [
+        "Week ending " + weekly_report.week_ending.strftime("%Y.%m.%d"),
+        weekly_report.critical,
+        weekly_report.high,
+        weekly_report.medium,
+        weekly_report.low,
+      ]
+
+      result.push data
+
+#      #only display open defects for the end of each sprint
+#      if week_number == sprint_weeks
+#        week_number = 0
+#        result.push data
+#      end
+#     week_number +=1
+    end
+
+    result
+  end
+
+
+  def get_open_defects_for_sprint_data_table(open_defects, sprint_weeks=@@DEFAULT_SPRINT_WEEKS)
     result = []
 
     headers = ['Week', 'Critical', 'High', 'Medium', 'Low'];

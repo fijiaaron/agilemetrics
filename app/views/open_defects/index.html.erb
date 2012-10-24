@@ -12,10 +12,6 @@
 
 <br />
 
-
-
 <% if is_username_an_owner_of_team?(current_user.login, @team) -%>
-
   <%= link_to "add open defects", new_project_open_defect_path, :project => @project, :class => "button" %>
-
 <% end %>

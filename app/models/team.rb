@@ -9,5 +9,4 @@ class Team < ActiveRecord::Base
 					:dependent => :destroy
 
 	has_many :projects
-
 end

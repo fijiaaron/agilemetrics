@@ -1,4 +1,6 @@
+
 <%= form_for(@open_defect) do |f| %>
+
   <% if @open_defect.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@open_defect.errors.count, "error") %> prohibited this open_defect from being saved:</h2>
@@ -11,11 +13,9 @@
     </div>
   <% end %>
 
-
   <div class="field">
     <%= f.label :project_id %><br />
     <%= f.collection_select :project_id, @projects, :id, :name, :prompt => true, :selected => selected?(@project.id) %>
-
   </div>
   <div class="field">
     <%= f.label :week_ending %><br />

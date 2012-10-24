@@ -119,6 +119,7 @@ module SprintsHelper
 		completed
 	end
 
+  ## added check for actual_velocity != 0 to prevent errors in display
 	def sprint_is_complete?(sprint)
 		!sprint.sprint_name.blank? && sprint.sprint_name != nil &&
 		!sprint.end_date.blank? && sprint.end_date != nil &&

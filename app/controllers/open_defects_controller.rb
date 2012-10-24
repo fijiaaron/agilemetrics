@@ -4,7 +4,6 @@ class OpenDefectsController < ApplicationController
   # GET /open_defects
   # GET /open_defects.json
   def index
-
     if params[:team_id]
       @team = Team.find(params[:team_id])
       @projects = Project.find(:team_id => @team.id)

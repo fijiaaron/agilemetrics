@@ -1,5 +1,3 @@
-
-
 <table class="open_defects">
 
   <thead>
@@ -10,6 +8,7 @@
       <th class="open_defects">High</th>
       <th class="open_defects">Medium</th>
       <th class="open_defects">Low</th>
+      <th class="open_defects">Total</th>
       <th class="actions">Actions</th>
     </tr>
   </thead>
@@ -17,7 +16,7 @@
 
   <% open_defects.each do |week| %>
   <% project = Project.find(week.project_id) %>
-  
+
     <tr>
       <td class="project"><%= link_to project.name, project_path(project) %></td>
       <td class="week_ending"><%= week.week_ending %></td>
@@ -25,6 +24,8 @@
       <td class="defect_count"><%= week.high %></td>
       <td class="defect_count"><%= week.medium %></td>
       <td class="defect_count"><%= week.low %></td>
+      <td class="defect_count"><%= week.low %></td>
+      <td class="defect_count defect_total"><%= week.critical + week.high + week.medium + week.low %></td>
       <td class="actions"><%= link_to "edit", edit_open_defect_path(week) %></td>
     </tr>
 

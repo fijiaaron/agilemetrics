@@ -8,8 +8,8 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.order("UPPER(name) asc")
-	@active_teams = @teams.where(:is_archived => false)
-	@archived_teams = @teams.where(:is_archived => true)
+    @active_teams = @teams.where(:is_archived => false)
+    @archived_teams = @teams.where(:is_archived => true)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,7 +22,6 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-
     @team = Team.find(params[:id])
     @summary_sprint = last_complete_sprint(@team.sprints)
     @first_sprint = @team.sprints.find(:first)
@@ -30,21 +29,17 @@ class TeamsController < ApplicationController
     @linear_regression = get_linear_regression_actual_velocity(@team.sprints, @last_sprint)
     @averages_set = last_n_sprints_inclusive(@team.sprints, @summary_sprint, 6)
 
-    #NOTE: only uses 1 project per team
+    #NOTE: only allowed 1 project per team (for now)
     if @team.projects.size > 0
       @project = @team.projects[0]
       @open_defects = open_defects_for_project(@project, @@OPEN_DEFECTS_REPORT_NUMBER_OF_WEEKS)
       @open_defects_data_table = get_open_defects_data_table(@open_defects, @team.sprint_weeks)
     end
 
-
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }
     end
-
-
   end
 
 

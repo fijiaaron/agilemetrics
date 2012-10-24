@@ -6,7 +6,6 @@
           <th class="projectInfo" colspan="2">Project Info</th>
           <th class="projectInfo" colspan="6">Open Defects</th>
       </tr>
-
       <tr>
         <th>Name</th>
         <th>TFS Area Path</th>
@@ -17,13 +16,12 @@
         <th>Low</th>
         <th>Total</th>
       </tr>
-
     </thead>
 
     <tbody>
 
   <% @team.projects.each do |project| %>
-  
+
     <% if @open_defects %>
       <% @open_defects.each do |report| %>
 
@@ -39,6 +37,7 @@
       </tr>
 
       <% end %>
+
     <% end %>
 
   <% end %>

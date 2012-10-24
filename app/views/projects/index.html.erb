@@ -2,17 +2,11 @@
 
 <% if @team %>
 	<h2> for <%= link_to @team.name, team_path(@team) %> team </h2>
+<% else %>
+  <h2> for all teams</th>
 <% end %>
 
 <table>
-
-<% if not defined? @team %>
-  <tr>
-        <th colspan="5">all projects</th>
-  </tr>
-
-<% end %>
-  
   <tr>
     <th>Name</th>
     <th>TFS path</th>
@@ -20,21 +14,24 @@
     <th>Actions</th>
   </tr>
 
-
-
 <% @projects.each do |project| %>
+
   <tr>
     <td><%= link_to project.name, project %></td>
     <td><%= project.tfs_path %></td>
     <td><%= project.team.name %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to 'Delete', project, confirm: 'Are you sure?', method: :delete %></td>
+    <td>
+      <% if is_username_an_owner_of_team?(current_user.login, @team) -%>
+      <%= link_to 'Edit', edit_project_path(project) %> | <%= link_to 'Delete', project, confirm: 'Are you sure?', method: :delete %>
+      <% end %>
+    </td>
   </tr>
+
 <% end %>
 
 </table>
 
 <br />
-
 
 <% if is_username_an_owner_of_team?(current_user.login, @team) -%>
   <p>You can add projects from TFS to track open defects</p> 

@@ -1,48 +1,47 @@
 <% if @team.projects and @team.projects.size > 0 %>
-  <table class="projects">
+<table class="projects">
 
-    <thead>
-      <tr>
-          <th class="projectInfo" colspan="2">Project Info</th>
-          <th class="projectInfo" colspan="6">Open Defects</th>
-      </tr>
-      <tr>
-        <th>Name</th>
-        <th>TFS Area Path</th>
-        <th>Week Ending</th>
-        <th>Critical</th>
-        <th>High</th>
-        <th>Medium</th>
-        <th>Low</th>
-        <th>Total</th>
-      </tr>
-    </thead>
+  <thead>
+    <tr>
+        <th class="projectInfo" colspan="2">Project Info</th>
+        <th class="projectInfo" colspan="6">Open Defects</th>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th>TFS Area Path</th>
+      <th>Week Ending</th>
+      <th>Critical</th>
+      <th>High</th>
+      <th>Medium</th>
+      <th>Low</th>
+      <th>Total</th>
+    </tr>
+  </thead>
 
-    <tbody>
+  <tbody>
 
   <% @team.projects.each do |project| %>
 
     <% if @open_defects %>
       <% @open_defects.each do |report| %>
 
-      <tr>
-        <td><%= link_to project.name, project %></td>
-        <td><%= project.tfs_path %></td>
-        <td class="week_ending"><%= report.week_ending %></td>
-        <td class="defect_count"><%= report.critical %></td>
-        <td class="defect_count"><%= report.high %></td>
-        <td class="defect_count"><%= report.medium %></td>
-        <td class="defect_count"><%= report.low %></td>
-        <td class="defect_count defect_total"><%= report.critical + report.high + report.medium + report.low %></td>
-      </tr>
+    <tr>
+      <td><%= link_to project.name, project %></td>
+      <td><%= project.tfs_path %></td>
+      <td class="week_ending"><%= report.week_ending %></td>
+      <td class="defect_count"><%= report.critical %></td>
+      <td class="defect_count"><%= report.high %></td>
+      <td class="defect_count"><%= report.medium %></td>
+      <td class="defect_count"><%= report.low %></td>
+      <td class="defect_count defect_total"><%= report.critical + report.high + report.medium + report.low %></td>
+    </tr>
 
       <% end %>
-
     <% end %>
 
   <% end %>
 
-	</table>
+</table>
 
 <% else %>
 	no projects

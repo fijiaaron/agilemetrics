@@ -22,13 +22,6 @@
 <p>
 <%= link_to "open defects history", project_open_defects_path(@project) %>
 </p>
-
-<!--
-<p>
-<%= link_to "add open defects", new_open_defect_path, :class => "button" %>
-</p>
--->
-
   
 <% if is_username_an_owner_of_team?(current_user.login, @team) -%>
   <%= link_to 'Edit Project', edit_project_path(@project) %> |

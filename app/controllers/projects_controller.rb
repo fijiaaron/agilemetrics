@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-	include SprintsHelper
+  include SprintsHelper
   include OpenDefectsHelper
 
 

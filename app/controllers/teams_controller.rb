@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-	include SprintsHelper
+  include SprintsHelper
   include OpenDefectsHelper
 
 
@@ -48,8 +48,8 @@ class TeamsController < ApplicationController
   # GET /averages.json
   def averages
     @teams = Team.order("UPPER(name) asc")
-	@active_teams = @teams.where(:is_archived => false)
-	@archived_teams = @teams.where(:is_archived => true)
+  @active_teams = @teams.where(:is_archived => false)
+  @archived_teams = @teams.where(:is_archived => true)
 
     respond_to do |format|
       format.html # averages.html.erb
@@ -63,7 +63,7 @@ class TeamsController < ApplicationController
   # GET /teams/new.json
   def new
     @team = Team.new
-	@team.owners = current_user.login if current_user != nil
+  @team.owners = current_user.login if current_user != nil
 
     respond_to do |format|
       format.html # new.html.erb

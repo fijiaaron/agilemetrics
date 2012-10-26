@@ -1,12 +1,12 @@
 <h1>new open defects report</h1>
 
 <% if @team %>
-	<h2> team <%= link_to @team.name, team_path(@team) %> </h2>
+  <h2> team <%= link_to @team.name, team_path(@team) %> </h2>
 <% end %>
 
 
 <% if @project %>
-	<h2> project <%= link_to @project.name, project_path(@project) %> </h2>
+  <h2> project <%= link_to @project.name, project_path(@project) %> </h2>
 <% end %>
 
 <%= render 'form' %>

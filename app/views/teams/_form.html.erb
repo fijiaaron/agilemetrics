@@ -18,12 +18,12 @@
   <div class="field">
     <%= f.label "Sprint length" %>
     <%= f.number_field :sprint_weeks, :in => 1..2 %>
-	(weeks)
+  (weeks)
   </div>
   <div class="field">
     <%= f.label "Admins" %>
     <%= f.text_field :owners %>
-	(login IDs of who can edit/delete the team)
+  (login IDs of who can edit/delete the team)
   </div>
   <div class="field">
     <%= f.label :is_archived %>
@@ -32,13 +32,13 @@
   <% if user_signed_in? && is_super_admin?(current_user.login) -%>
   <div class="field">
     <%= f.label :test_certification %>
-	<%
-		options = []
-		(0..5).to_a.each do |i|
-			options << ["Level #{i}", i]
-		end
-	-%>
-	<%= f.select :test_certification, options %>
+  <%
+    options = []
+    (0..5).to_a.each do |i|
+      options << ["Level #{i}", i]
+    end
+  -%>
+  <%= f.select :test_certification, options %>
   </div>
   <% end -%>
   <div class="actions">
